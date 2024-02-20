@@ -18,7 +18,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-RUN chown -R 755 nginx:nginx /usr/share/nginx/html
+RUN chmod -R 755 /usr/share/nginx/html
 
 EXPOSE 80
 
