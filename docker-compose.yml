@@ -1,22 +1,24 @@
 version: '3'
 
 services:
-  deployment-prod:
+  inquizitive-app-container:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: inquizitive-app-container
+    restart: always
     ports:
-      - "3000:80"
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - "8000:3000"
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8080:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./build:/usr/share/nginx/html:ro
-    depends_on:
-      - deployment-prod
+  # nginx:
+  #   image: inquizitive-app-image:latest
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./build:/usr/share/nginx/html:ro
+  #   depends_on:
+  #     - deployment-prod
