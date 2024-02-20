@@ -1,13 +1,12 @@
 FROM node:20.11.1 as builder
 
-WORKDIR /app
+WORKDIR '/app'
 
-COPY package.json .
-COPY package-lock.json .
-
-RUN npm install
+COPY package*.json .
 
 COPY . .
+
+RUN npm install
 
 RUN npm run build
 
@@ -17,7 +16,6 @@ RUN chmod -R 755 /usr/share/nginx/html
 
 RUN rm -rf /usr/share/nginx/html/*
 
-# COPY nginx.conf /etc/nginx/conf.d/
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/build /usr/share/nginx/html
