@@ -1,0 +1,11 @@
+version: '1'
+services:
+  deployment:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    ports:
+      - '5000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules

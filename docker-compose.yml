@@ -1,11 +1,8 @@
 version: '1'
 services:
-  deployment:
+  deployment-prod:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '5000:3000'
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - '80:80'
