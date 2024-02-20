@@ -2,7 +2,9 @@ version: '3'
 
 services:
   deployment-prod:
-    image: inquizitive-app-deployment-prod:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
     volumes:
