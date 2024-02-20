@@ -1,12 +1,26 @@
-version: '3'
+# version: '3'
+
+# services:
+#   inquizitive-app-container:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: inquizitive-app-container
+#     restart: always
+#     ports:
+#       - "8000:3000"
+
+version: "1"
 
 services:
-  inquizitive-app-container:
+  ngnix-react:
+    image: inquizitive-app:latest
+    container_name: container-inquizitive-app
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: inquizitive-app-container
-    restart: always
     ports:
-      - "8000:3000"
+      - 80:80
+    environment:
+      - NODE_ENV=production
 
