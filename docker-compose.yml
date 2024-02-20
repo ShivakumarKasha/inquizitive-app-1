@@ -1,11 +1,31 @@
+# version: '1'
+# services:
+#   deployment:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - '5000:3000'
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+
 version: '1'
+
 services:
-  deployment:
+  deployment-prod:
     build:
-      context: .
-      dockerfile: Dockerfile.development
+       context: .
+       dockerfile: Dockerfile
     ports:
-      - '5000:3000'
+      - "3000:80"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./build:/usr/share/nginx/html:ro
+    depends_on:
+      - deployment-prod

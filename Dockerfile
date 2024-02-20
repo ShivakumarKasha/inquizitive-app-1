@@ -1,4 +1,4 @@
-FROM node:20.11.1
+FROM node:20.11.1 as builder
 
 WORKDIR '/app'
 
@@ -13,9 +13,12 @@ FROM nginx:latest
 
 RUN rm -rf /etc/nginx/conf.d/default.conf
 
-COPY nginx.conf /etc/nginx/conf.d/
+# COPY nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/build /usr/share/nginx/html
+
+RUN chown -R 755 nginx:nginx /usr/share/nginx/html
 
 EXPOSE 80
 
